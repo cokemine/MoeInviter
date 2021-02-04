@@ -68,7 +68,7 @@ router.get('/join', async (ctx, next) => {
     }
     const myURL = new URL(referer);
     const code = myURL.searchParams.get('code');
-    if (!code || !myURL || auth[login]["requestToken"] !== code) {
+    if (!code || !myURL || !auth[login] || auth[login]["requestToken"] !== code) {
         throw({
             status: 403,
             message: "再检查一下？"
