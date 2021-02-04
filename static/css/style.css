@@ -1,0 +1,25 @@
+body {
+    background: url("/images/bg_howatama.png"), linear-gradient(to bottom, #b486db 0%, #e0acb4 100%);
+}
+
+.avatar img {
+    width: 100px;
+    height: 100px;
+}
+/*yashiro*/
+#wrapper::after {
+    content: '';
+    display: block;
+    position: fixed;
+    width: 160px;
+    height: 160px;
+    background: url('/images/cmn_pgt.png');
+    z-index: 99;
+    right: 25px;
+    bottom: 0;
+}
+@media (max-width: 768px) {
+    #wrapper::after {
+        right: 0!important;
+    }
+}
