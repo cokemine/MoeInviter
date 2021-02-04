@@ -2,8 +2,9 @@ const Koa = require('koa');
 const views = require('koa-views');
 const serve = require('koa-static');
 const bodyParser = require('koa-bodyparser');
+const mount = require('koa-mount');
 const path = require('path');
-const router = require('./router')
+const router = require('./router');
 const Resolve = p => path.resolve(__dirname, p);
 const app = new Koa();
 const debug = () => {
@@ -29,7 +30,7 @@ const debug = () => {
 }
 app.use(debug());
 app.use(bodyParser());
-app.use(serve(Resolve('./static')));
+app.use(mount('/static', serve(Resolve('./static'))));
 app.use(views((Resolve('./views')), {
     extension: 'ejs'
 }));
