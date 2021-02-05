@@ -1,11 +1,12 @@
 const Router = require('koa-router');
 const axios = require('axios');
 const router = new Router();
-const {organizationName, orgUserName, Oauth, userName, personalToken} = require('./config.json');
+const {organizationName, orgUserName, Oauth, userName, personalToken, avatarURL} = require('./config.json');
 const {clientID, clientSecret} = Oauth;
 const auth = {};
 router.get('/', async (ctx, next) => {
     await ctx.render('default', {
+        avatarURL,
         organizationName
     });
     await next();

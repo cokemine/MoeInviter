@@ -37,4 +37,4 @@ app.use(views((Resolve('./views')), {
 app.use(router.routes());
 app.listen(3000, () => {
     console.log("http://localhost:3000");
-})
+});
