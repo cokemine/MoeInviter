@@ -7,6 +7,13 @@ body {
     min-width: 27em;
 }
 
+@media screen and (max-width: 480px) {
+    #main {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
 .avatar img {
     width: 100px;
     height: 100px;
