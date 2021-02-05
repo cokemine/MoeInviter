@@ -9,27 +9,15 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
     <link rel="stylesheet" href="/static/css/main.css"/>
     <link rel="stylesheet" href="/static/css/style.css">
-    <title>Join <%= originationName %></title>
+    <title>Welcome to <%= organizationName %></title>
 </head>
 <body class="is-preload">
 <div id="wrapper">
-    <% if (locals.avatar_url) { %>
-        <section id="main">
-            <header>
-                <span class="avatar"><img src="<%= avatar_url %>" alt=""/></span>
-                <h1><%= originationName %></h1>
-                <p>Welcome,<%= name %>.</p>
-                <p>Click the button below to join us</p>
-            </header>
-            <footer>
-                <a href="/join?login=<%= login %>" class="button">Join US</a>
-            </footer>
-        </section>
-    <% } else { %>
+    <% if (!locals.avatar_url) { %>
         <section id="main">
             <header>
                 <span class="avatar"><img src="static/images/avatar.jpg" alt=""/></span>
-                <h1><%= originationName %></h1>
+                <h1><%= organizationName %></h1>
                 <p>Welcome to Join US</p>
             </header>
             <footer>
@@ -38,11 +26,40 @@
                 </ul>
             </footer>
         </section>
+    <% } else if(locals.orgUserName){ %>
+        <section id="main">
+            <header>
+                <span class="avatar"><img src="<%= avatar_url %>" alt=""/></span>
+                <h1><%= organizationName %></h1>
+                <p>Thanks for your joining.</p>
+                <p>You are about to be redirected to our organization after few seconds.</p>
+            </header>
+            <footer>
+                <a href="https://github.com/<%= orgUserName %>" class="button"><%= organizationName %></a>
+            </footer>
+            <script>
+                setTimeout(function () {
+                    window.location.href = "https://github.com/<%= orgUserName %>"
+                }, 1500);
+            </script>
+        </section>
+    <% } else { %>
+        <section id="main">
+            <header>
+                <span class="avatar"><img src="<%= avatar_url %>" alt=""/></span>
+                <h1><%= organizationName %></h1>
+                <p>Welcome,<%= name %>.</p>
+                <p>Click the button below to join us</p>
+            </header>
+            <footer>
+                <a href="/join?login=<%= login %>" class="button">Join US</a>
+            </footer>
+        </section>
     <% } %>
     <!-- Footer -->
     <footer id="footer">
         <ul class="copyright">
-            <li>&copy; <%= originationName %></li>
+            <li>&copy; <%= organizationName %></li>
             <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
             <li>Powered by: <a href="https://github.com/CokeMine/MoeInviter">MoeInviter</a></li>
         </ul>

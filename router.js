@@ -1,12 +1,12 @@
 const Router = require('koa-router');
 const axios = require('axios');
 const router = new Router();
-const {originationName, orgUserName, Oauth, userName, personalToken} = require('./config.json');
+const {organizationName, orgUserName, Oauth, userName, personalToken} = require('./config.json');
 const {clientID, clientSecret} = Oauth;
 const auth = {};
 router.get('/', async (ctx, next) => {
     await ctx.render('default', {
-        originationName
+        organizationName
     });
     await next();
 });
@@ -49,8 +49,10 @@ router.get('/oauth/redirect', async ctx => {
         if (!auth[login]) auth[login] = {}
         auth[login]["requestToken"] = requestToken;
         auth[login]["id"] = id;
+        auth[login]["avatar_url"] = avatar_url;
+        auth[login]["name"] = name;
         await ctx.render('default', {
-            originationName,
+            organizationName,
             avatar_url,
             name,
             login
@@ -93,6 +95,12 @@ router.get('/join', async (ctx, next) => {
         }
     });
     auth[login]["status"] = true;
+    await ctx.render('default', {
+        organizationName,
+        orgUserName,
+        name: auth[login]["name"],
+        avatar_url: auth[login]["avatar_url"]
+    })
     await next();
 });
 module.exports = router
