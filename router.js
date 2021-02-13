@@ -4,17 +4,18 @@ const router = new Router();
 const {organizationName, orgUserName, Oauth, userName, personalToken, avatarURL} = require('./config.json');
 const {clientID, clientSecret} = Oauth;
 const auth = {};
-router.get('/', async (ctx, next) => {
+router.get('/', async ctx => {
     await ctx.render('default', {
         avatarURL,
         organizationName
     });
-    await next();
 });
+
 router.get('/github/login', async ctx => {
     let path = `https://github.com/login/oauth/authorize?client_id=${clientID}`;
     ctx.redirect(path);
 });
+
 router.get('/oauth/redirect', async ctx => {
     const requestToken = ctx.request.query.code;
     let res = await axios.post('https://github.com/login/oauth/access_token', {
@@ -27,17 +28,7 @@ router.get('/oauth/redirect', async ctx => {
         }
     });
     if (res.data["error"]) {
-        throw({status: 500, message: "出现了一些未知错误"});
-        //{
-        //   error: 'bad_verification_code',
-        //   error_description: 'The code passed is incorrect or expired.',
-        //   error_uri: 'https://docs.github.com/apps/managing-oauth-apps/troubleshooting-oauth-app-access-token-request-errors/#bad-verification-code'
-        // }
-        //{
-        //   access_token: '',
-        //   token_type: 'bearer',
-        //   scope: ''
-        // }
+        throw({status: 500, message: res.data["error"]});
     } else {
         const accessToken = res.data["access_token"];
         res = await axios.get('https://api.github.com/user', {
@@ -60,9 +51,10 @@ router.get('/oauth/redirect', async ctx => {
         });
     }
 });
-router.get('/join', async (ctx, next) => {
+
+router.get('/join', async ctx => {
     const referer = ctx.request.header['referer'];
-    const login = ctx.request.query.login;
+    const login = ctx.request.query['login'];
     if (!referer || !login) {
         throw({
             status: 403,
@@ -102,6 +94,6 @@ router.get('/join', async (ctx, next) => {
         name: auth[login]["name"],
         avatar_url: auth[login]["avatar_url"]
     })
-    await next();
 });
+
 module.exports = router

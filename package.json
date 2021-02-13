@@ -1,6 +1,6 @@
 {
   "name": "moeinviter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -9,8 +9,8 @@
     "stop": "pm2 delete MoeInviter"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Mizuki Kagurazaka",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
     "ejs": "^3.1.5",
