@@ -5,7 +5,7 @@ const {organizationName, orgUserName, Oauth, userName, personalToken, avatarURL}
 const {clientID, clientSecret} = Oauth;
 const auth = {};
 router.get('/', async ctx => {
-    await ctx.render('default', {
+    await ctx.render('welcome', {
         avatarURL,
         organizationName
     });
@@ -43,7 +43,7 @@ router.get('/oauth/redirect', async ctx => {
         auth[login]["id"] = id;
         auth[login]["avatar_url"] = avatar_url;
         auth[login]["name"] = name;
-        await ctx.render('default', {
+        await ctx.render('join', {
             organizationName,
             avatar_url,
             name,
@@ -88,7 +88,7 @@ router.get('/join', async ctx => {
         }
     });
     auth[login]["status"] = true;
-    await ctx.render('default', {
+    await ctx.render('redirect', {
         organizationName,
         orgUserName,
         name: auth[login]["name"],

@@ -1,0 +1,13 @@
+<%- include('components/header') %>
+<section id="main">
+    <header>
+        <span class="avatar"><img src="<%= avatar_url %>" alt=""/></span>
+        <h1><%= organizationName %></h1>
+        <p>Welcome,<%= name %>.</p>
+        <p>Click the button below to join us</p>
+    </header>
+    <footer>
+        <a href="/join?login=<%= login %>" class="button">Join US</a>
+    </footer>
+</section>
+<%- include('components/footer') %>

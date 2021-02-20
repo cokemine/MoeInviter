@@ -1,0 +1,18 @@
+<%- include('components/header') %>
+<section id="main">
+    <header>
+        <span class="avatar"><img src="<%= avatar_url %>" alt=""/></span>
+        <h1><%= organizationName %></h1>
+        <p>Thanks for your joining.</p>
+        <p>You are about to be redirected to our organization after few seconds.</p>
+    </header>
+    <footer>
+        <a href="https://github.com/<%= orgUserName %>" class="button"><%= organizationName %></a>
+    </footer>
+    <script>
+        setTimeout(function () {
+            window.location.href = "https://github.com/<%= orgUserName %>"
+        }, 1500);
+    </script>
+</section>
+<%- include('components/footer') %>
