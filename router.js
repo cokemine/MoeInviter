@@ -4,17 +4,12 @@ const router = new Router();
 const {organizationName, orgUserName, Oauth, userName, personalToken, avatarURL} = require('./config.json');
 const {clientID, clientSecret} = Oauth;
 const auth = {};
-router.get('/', async ctx => {
-    await ctx.render('welcome', {
-        avatarURL,
-        organizationName
-    });
-});
+router.get('/', async ctx => await ctx.render('welcome', {
+    avatarURL,
+    organizationName
+}));
 
-router.get('/github/login', async ctx => {
-    let path = `https://github.com/login/oauth/authorize?client_id=${clientID}`;
-    ctx.redirect(path);
-});
+router.get('/github/login', async ctx => ctx.redirect(`https://github.com/login/oauth/authorize?client_id=${clientID}`));
 
 router.get('/oauth/redirect', async ctx => {
     const requestToken = ctx.request.query.code;
